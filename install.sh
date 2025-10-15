@@ -2,7 +2,7 @@
 echo "🛠️ Memulai instalasi kebutuhan server..."
 
 echo "🚀 Memasang Apache2..."
-bash apache2.sh
+bash apache.sh
 echo "✅ Instalasi Apache2 selesai"
 
 echo "🚀 Memasang Nginx..."
