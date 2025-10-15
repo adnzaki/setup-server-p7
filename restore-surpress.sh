@@ -27,4 +27,15 @@ sudo chmod -R 755 /var/www/html/surpress
 echo "🗑️ Menghapus file backup Surpress dari /tmp."
 sudo rm /tmp/surpress_full_${DATE_FOLDER}_03-00.tar.gz
 
+
+# 8. Tes akses ke domain Surpress
+echo "🌐 Menguji akses ke http://surpress.sdnpengasinan7.sch.id ..."
+HTTP_STATUS=$(curl -s -o /dev/null -w "%{http_code}" http://surpress.sdnpengasinan7.sch.id)
+
+if [ "$HTTP_STATUS" -eq 200 ]; then
+    echo "✅ Akses berhasil: Surpress aktif dan merespons dengan kode 200."
+else
+    echo "❌ Akses gagal: Surpress merespons dengan kode $HTTP_STATUS."
+fi
+
 echo "✅ Restore aplikasi Surpress selesai."
