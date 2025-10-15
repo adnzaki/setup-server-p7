@@ -44,3 +44,5 @@ sudo systemctl status tailscale
 
 tailscale status
 tailscale ip -4
+
+echo "🎉🎉🎉 Instalasi selesai 😄😆"
