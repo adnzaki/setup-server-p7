@@ -29,6 +29,10 @@ echo "🚀 Memasang Cloudflare untuk keperluan tunnel..."
 bash cloudflare.sh
 echo "✅ Instalasi Cloudflare selesai"
 
+echo "🚀 Memasang MEGA CLI..."
+bash mega-cli.sh
+echo "✅ Instalasi MEGA CLI selesai"
+
 
 # ------ Cek status semua service
 echo "😬😬😬 Cek status semua service..."
