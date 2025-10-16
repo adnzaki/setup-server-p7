@@ -22,7 +22,7 @@ fi
 echo "📂 Folder backup terbaru: $LATEST_FOLDER"
 
 # === Tentukan path backup aplikasi dan database ===
-APP_BACKUP_PATH="$APP_BACKUP_PREFIX/${LATEST_FOLDER}/surpress_full_${LATEST_FOLDER}_03-00.tar.gz"
+APP_BACKUP_PATH=$(mega-ls "$APP_BACKUP_PREFIX/${LATEST_FOLDER}" | grep '.tar.gz' | head -n 1)
 DB_BACKUP_FOLDER="$DB_BACKUP_ROOT/${LATEST_FOLDER}"
 
 # === Bersihkan folder aplikasi jika sudah berisi file ===
@@ -34,7 +34,7 @@ else
 fi
 
 # === Unduh dan ekstrak file aplikasi ===
-mega-get "$APP_BACKUP_PATH" /tmp/
+mega-get "$APP_BACKUP_PREFIX/${LATEST_FOLDER}/${APP_BACKUP_PATH}" /tmp/
 echo "📦 File aplikasi Surpress berhasil diunduh."
 
 sudo tar -xzf "/tmp/surpress_full_${LATEST_FOLDER}_03-00.tar.gz" -C "$APP_DIR"
