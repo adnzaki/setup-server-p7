@@ -1,3 +1,6 @@
+# 1. Pastikan service cloudflare mati
+cloudflared service uninstall
+
 # 2. Tentukan user aktif dan buat folder credential
 ACTIVE_USER=${SUDO_USER:-$(whoami)}
 USER_HOME=$(eval echo "~$ACTIVE_USER")
