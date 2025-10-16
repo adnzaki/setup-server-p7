@@ -13,6 +13,10 @@ sudo apt install -y webmin
 # 3. Install Cockpit
 sudo apt install -y cockpit
 
+# 3. Install Cockpit Navigator for file browser
+wget https://github.com/45Drives/cockpit-navigator/releases/download/v0.5.10/cockpit-navigator_0.5.10-1focal_all.deb
+sudo apt install ./cockpit-navigator_0.5.10-1focal_all.deb
+
 # 4. Enable dan jalankan service Webmin & Cockpit
 sudo systemctl enable webmin
 sudo systemctl start webmin
