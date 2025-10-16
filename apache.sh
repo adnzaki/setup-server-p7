@@ -47,10 +47,11 @@ sudo tee /etc/apache2/sites-available/surpress.conf > /dev/null <<EOF
     DocumentRoot /var/www/html/surpress
 
     <Directory /var/www/html/surpress>
-        Options Indexes FollowSymLinks
+        Options -Indexes +FollowSymLinks
         AllowOverride All
         Require all granted
     </Directory>
+
 
     ErrorLog \${APACHE_LOG_DIR}/surpress_error.log
     CustomLog \${APACHE_LOG_DIR}/surpress_access.log combined
