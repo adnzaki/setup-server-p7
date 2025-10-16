@@ -33,6 +33,11 @@ echo "🚀 Memasang MEGA CLI..."
 bash mega-cli.sh
 echo "✅ Instalasi MEGA CLI selesai"
 
+echo "🐎🦬🦌🦏 Memasang paket tambahan..."
+sudo apt install ncdu
+
+echo "⚾🥎🏀 Mengatur log-rotation untuk menghemat space..."
+bash log-rotation.sh
 
 # ------ Cek status semua service
 echo "😬😬😬 Cek status semua service..."
@@ -41,8 +46,5 @@ sudo systemctl status nginx
 sudo systemctl status mariadb
 sudo systemctl status tailscaled
 sudo systemctl status tailscale
-
-tailscale status
-tailscale ip -4
 
 echo "🎉🎉🎉 Instalasi selesai 😄😆"
