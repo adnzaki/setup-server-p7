@@ -22,8 +22,13 @@ fi
 echo "📂 Folder backup terbaru: $LATEST_FOLDER"
 
 # === Tentukan path backup aplikasi dan database ===
-APP_BACKUP_PATH=$(mega-ls "$APP_BACKUP_PREFIX/${LATEST_FOLDER}" | grep '.tar.gz' | head -n 1)
-DB_BACKUP_FOLDER="$DB_BACKUP_ROOT/${LATEST_FOLDER}"
+APP_BACKUP_FILE=$(mega-ls "$APP_BACKUP_PREFIX/${LATEST_FOLDER}" | grep '.tar.gz' | head -n 1)
+DB_ZIP_FILE=$(mega-ls "$DB_BACKUP_ROOT/${LATEST_FOLDER}" | grep '.zip' | head -n 1)
+
+if [ -z "$APP_BACKUP_FILE" ] || [ -z "$DB_ZIP_FILE" ]; then
+    echo "❌ File backup aplikasi atau database tidak ditemukan."
+    exit 1
+fi
 
 # === Bersihkan folder aplikasi jika sudah berisi file ===
 if [ "$(ls -A "$APP_DIR")" ]; then
@@ -34,15 +39,15 @@ else
 fi
 
 # === Unduh dan ekstrak file aplikasi ===
-mega-get "$APP_BACKUP_PREFIX/${LATEST_FOLDER}/${APP_BACKUP_PATH}" /tmp/
+mega-get "$APP_BACKUP_PREFIX/${LATEST_FOLDER}/${APP_BACKUP_FILE}" /tmp/
 echo "📦 File aplikasi Surpress berhasil diunduh."
 
-sudo tar -xzf "/tmp/surpress_full_${LATEST_FOLDER}_03-00.tar.gz" -C "$APP_DIR"
+sudo tar -xzf "/tmp/${APP_BACKUP_FILE}" -C "$APP_DIR"
 echo "📂 File Surpress berhasil diekstrak ke $APP_DIR."
 
 sudo chown -R www-data:www-data "$APP_DIR"
 sudo chmod -R 755 "$APP_DIR"
-rm "/tmp/surpress_full_${LATEST_FOLDER}_03-00.tar.gz"
+rm "/tmp/${APP_BACKUP_FILE}"
 echo "🗑️ File backup aplikasi dihapus dari /tmp."
 
 # === Restore Database ===
@@ -69,22 +74,25 @@ else
     echo "✅ Database 'surpress' kosong. Siap restore."
 fi
 
-# Ambil file SQL terbaru dari folder
-LATEST_SQL=$(mega-ls "$DB_BACKUP_FOLDER" | grep db_surpress_ | sort | tail -n 1)
+# === Unduh dan ekstrak file ZIP database ===
+echo "📥 Mengunduh file ZIP database: $DB_ZIP_FILE"
+mega-get "$DB_BACKUP_ROOT/${LATEST_FOLDER}/${DB_ZIP_FILE}" /tmp/
 
-if [ -z "$LATEST_SQL" ]; then
-    echo "❌ Gagal menemukan file SQL backup."
+unzip "/tmp/${DB_ZIP_FILE}" -d /tmp/
+SQL_FILE=$(unzip -l "/tmp/${DB_ZIP_FILE}" | awk '/.sql$/ {print $NF}' | head -n 1)
+
+if [ -z "$SQL_FILE" ]; then
+    echo "❌ File .sql tidak ditemukan dalam ZIP."
     exit 1
 fi
 
-echo "📥 Mengunduh file SQL: $LATEST_SQL"
-mega-get "$DB_BACKUP_FOLDER/$LATEST_SQL" /tmp/
-
 # Import ke database
-mysql -uroot -p"$MYSQL_PASS" surpress < "/tmp/$LATEST_SQL"
-echo "✅ Database Surpress berhasil direstore dari $LATEST_SQL"
+mysql -uroot -p"$MYSQL_PASS" surpress < "/tmp/${SQL_FILE}"
+echo "✅ Database Surpress berhasil direstore dari ${SQL_FILE}"
 
-rm "/tmp/$LATEST_SQL"
+# Bersihkan file ZIP dan SQL
+rm "/tmp/${DB_ZIP_FILE}"
+rm "/tmp/${SQL_FILE}"
 
 # === Tes akses website ===
 echo "🌐 Menguji akses ke http://surpress.sdnpengasinan7.sch.id ..."
@@ -96,4 +104,4 @@ else
     echo "❌ Akses gagal: Surpress merespons dengan kode $HTTP_STATUS."
 fi
 
-echo "🎉 Restore lengkap: Aplikasi + Database Surpress selesai.🥳🥳"
+echo "🎉 Restore lengkap: Aplikasi + Database Surpress selesai.🥳"
