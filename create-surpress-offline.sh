@@ -3,7 +3,7 @@
 # === Konfigurasi dasar ===
 SOURCE_DIR="/var/www/html/surpress"
 TARGET_DIR="/var/www/html/surpress-offline"
-ENV_FILE="$TARGET_DIR/.env"
+ENV_FILE="$TARGET_DIR/api/.env"
 APACHE_CONF="/etc/apache2/sites-available/surpress-offline.conf"
 PORT="8925"
 BASE_URL_ONLINE="https://surpress.sdnpengasinan7.sch.id/api/public/"
