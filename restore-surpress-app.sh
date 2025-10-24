@@ -1,36 +1,20 @@
 #!/bin/bash
-
-# === Load konfigurasi dari .env ===
-if [ -f .env ]; then
-    export $(grep -v '^#' .env | xargs)
-else
-    echo "❌ File .env tidak ditemukan."
-    exit 1
-fi
-
-if [[ -z "$MEGA_EMAIL" || -z "$MEGA_PASS" ]]; then
-    echo "❌ MEGA_EMAIL atau MEGA_PASS belum diatur di .env."
-    exit 1
-fi
-
-echo "DEBUG: MEGA_EMAIL=$MEGA_EMAIL"
-echo "DEBUG: MEGA_PASS=$MEGA_PASS"
-
+MEGA_EMAIL=sdnpengasinantujuh@gmail.com
+MEGA_PASS=@pgn7_2021@
+APP_DIR=/var/www/html/surpress
+APP_BACKUP_PREFIX=/backup-surpress-full
 
 # === Login ke MEGA ===
-mega-logout 2>/dev/null
 mega-login "$MEGA_EMAIL" "$MEGA_PASS"
 
 # Tunggu hingga login selesai
-for i in {1..10}; do
-    STATUS=$(mega-whoami 2>&1)
-    if [[ "$STATUS" != *"Not logged in"* ]]; then
-        echo "✅ Login MEGA berhasil."
-        break
-    fi
-    echo "⏳ Menunggu login MEGA selesai..."
-    sleep 2
-done
+STATUS=$(mega-whoami 2>&1)
+if [[ "$STATUS" != *"Not logged in"* ]]; then
+    echo "✅ Login MEGA berhasil."
+    break
+fi
+echo "⏳ Menunggu login MEGA selesai..."
+sleep 2
 
 if [[ "$STATUS" == *"Not logged in"* ]]; then
     echo "❌ Gagal login ke MEGA setelah menunggu."
