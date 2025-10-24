@@ -19,7 +19,7 @@ fi
 
 echo "📂 Folder backup terbaru: $LATEST_FOLDER"
 
-DB_ZIP_FILE=$(mega-ls "$DB_BACKUP_ROOT/${LATEST_FOLDER}" | grep '.zip' | head -n 1)
+DB_ZIP_FILE=$(mega-ls "$DB_BACKUP_ROOT/${LATEST_FOLDER}" | grep '.zip' | sort | tail -n 1)
 
 if [ -z "$DB_ZIP_FILE" ]; then
     echo "❌ File backup aplikasi atau database tidak ditemukan."

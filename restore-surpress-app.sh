@@ -32,7 +32,7 @@ fi
 echo "📂 Folder backup terbaru: $LATEST_FOLDER"
 
 # === Tentukan file backup aplikasi ===
-APP_BACKUP_FILE=$(mega-ls "$APP_BACKUP_PREFIX/${LATEST_FOLDER}" | grep '.tar.gz' | head -n 1)
+APP_BACKUP_FILE=$(mega-ls "$APP_BACKUP_PREFIX/${LATEST_FOLDER}" | grep '.tar.gz' | sort | tail -n 1)
 
 if [ -z "$APP_BACKUP_FILE" ]; then
     echo "❌ File backup aplikasi tidak ditemukan."
