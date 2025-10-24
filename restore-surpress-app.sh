@@ -13,6 +13,9 @@ if [[ -z "$MEGA_EMAIL" || -z "$MEGA_PASS" ]]; then
     exit 1
 fi
 
+echo "DEBUG: MEGA_EMAIL=$MEGA_EMAIL"
+echo "DEBUG: MEGA_PASS=$MEGA_PASS"
+
 
 # === Login ke MEGA ===
 mega-logout 2>/dev/null
