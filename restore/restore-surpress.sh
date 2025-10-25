@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # === Konfigurasi ===
-bash restore-surpress-app.sh
-bash restore-surpress-db.sh
+bash surpress-app.sh
+bash surpress-db.sh
 
 # === Tes akses website ===
 echo "🌐 Menguji akses ke http://surpress.sdnpengasinan7.sch.id ..."

@@ -2,35 +2,35 @@
 echo "🛠️ Memulai instalasi kebutuhan server..."
 
 echo "🚀 Memasang Apache2..."
-bash apache.sh
+bash /packages/apache.sh
 echo "✅ Instalasi Apache2 selesai"
 
 echo "🚀 Memasang Nginx..."
-bash nginx.sh
+bash /packages/nginx.sh
 echo "✅ Instalasi Nginx selesai"
 
 echo "🚀 Memasang PHP..."
-bash php.sh
+bash /packages/php.sh
 echo "✅ Instalasi PHP selesai"
 
 echo "🚀 Memasang MariaDB..."
-bash mysql.sh
+bash /packages/mysql.sh
 echo "✅ Instalasi MariaDB selesai"
 
 echo "🚀 Memasang Tailscale..."
-bash tailscale.sh
+bash /packages/tailscale.sh
 echo "✅ Instalasi Tailscale selesai"
 
 echo "🚀 Memasang Control Panel..."
-bash control-panel.sh
+bash /packages/control-panel.sh
 echo "✅ Instalasi Control Panel selesai"
 
 echo "🚀 Memasang Cloudflare untuk keperluan tunnel..."
-bash cloudflare.sh
+bash /packages/cloudflare.sh
 echo "✅ Instalasi Cloudflare selesai"
 
 echo "🚀 Memasang MEGA CLI..."
-bash mega-cli.sh
+bash /packages/mega-cli.sh
 echo "✅ Instalasi MEGA CLI selesai"
 
 echo "🐎🦬🦌🦏 Memasang paket tambahan..."
