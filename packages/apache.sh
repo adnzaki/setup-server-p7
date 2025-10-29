@@ -58,10 +58,48 @@ sudo tee /etc/apache2/sites-available/surpress.conf > /dev/null <<EOF
 </VirtualHost>
 EOF
 
+# === Buat konfigurasi virtual host Bit & Bait ===
+echo "🛠️ Membuat konfigurasi virtual host bitdanbait.web.id..."
+sudo tee /etc/apache2/sites-available/bitdanbait.conf > /dev/null <<EOF
+<VirtualHost *:8082>
+    ServerName bitdanbait.web.id
+    DocumentRoot /var/www/html/bitdanbait/public
+
+    <Directory /var/www/html/bitdanbait/public>
+        Options -Indexes +FollowSymLinks
+        AllowOverride All
+        Require all granted
+    </Directory>
+
+    ErrorLog \${APACHE_LOG_DIR}/bitdanbait_error.log
+    CustomLog \${APACHE_LOG_DIR}/bitdanbait_access.log combined
+</VirtualHost>
+EOF
+
+# === Buat konfigurasi virtual host Bit & Bait ===
+echo "🛠️ Membuat konfigurasi virtual host cms.bitdanbait.web.id..."
+sudo tee /etc/apache2/sites-available/cms-bitdanbait.conf > /dev/null <<EOF
+<VirtualHost *:8083>
+    ServerName cms.bitdanbait.web.id
+    DocumentRoot /var/www/html/bitdanbait/cms
+
+    <Directory /var/www/html/bitdanbait/cms>
+        Options Indexes FollowSymLinks
+        AllowOverride All
+        Require all granted
+    </Directory>
+
+    ErrorLog \${APACHE_LOG_DIR}/cms_bitdanbait_error.log
+    CustomLog \${APACHE_LOG_DIR}/cms_bitdanbait_access.log combined
+</VirtualHost>
+EOF
+
 # === Aktifkan konfigurasi virtual host dan nonaktifkan default ===
 echo "🔧 Mengaktifkan konfigurasi virtual host..."
 sudo a2ensite sdnpengasinan7.conf
 sudo a2ensite surpress.conf
+sudo a2ensite bitdanbait.conf
+sudo a2ensite cms-bitdanbait.conf
 sudo a2dissite 000-default.conf
 
 # === Aktifkan mod_rewrite ===
@@ -98,6 +136,7 @@ echo "🌐 Menguji konektivitas virtual host..."
 HOSTNAMES=(
   "sdnpengasinan7.sch.id"
   "surpress.sdnpengasinan7.sch.id"
+  "bitdanbait.web.id"
 )
 
 for HOST in "${HOSTNAMES[@]}"; do

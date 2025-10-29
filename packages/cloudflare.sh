@@ -51,7 +51,7 @@ EOF
 sudo mkdir -p /etc/cloudflared
 sudo tee /etc/cloudflared/config.yml > /dev/null <<EOF
 tunnel: 52b2a47a-0d9d-4b3a-80a9-0f270a86a262
-credentials-file: $CRED_FILE
+credentials-file: /home/pengasinan7/.cloudflared/52b2a47a-0d9d-4b3a-80a9-0f270a86a262.json
 
 ingress:
   - hostname: surpress.sdnpengasinan7.sch.id
@@ -59,8 +59,19 @@ ingress:
     originRequest:
       httpHostHeader: surpress.sdnpengasinan7.sch.id
 
+  - hostname: siabsen.sdnpengasinan7.sch.id
+    service: http://localhost:80
+    originRequest:
+      httpHostHeader: siabsen.sdnpengasinan7.sch.id
+
   - hostname: sdnpengasinan7.sch.id
     service: http://localhost:80
+
+  - hostname: bitdanbait.web.id
+    service: http://localhost:8082
+    
+  - hostname: cms.bitdanbait.web.id
+    service: http://localhost:8083
 
   - hostname: webmin.sdnpengasinan7.sch.id
     service: https://localhost:8080
@@ -74,6 +85,14 @@ ingress:
 
   - hostname: erapor.sdnpengasinan7.sch.id
     service: http://localhost:8055
+    originRequest:
+      httpHostHeader: localhost:8055
+      headers:
+        Host: localhost:8055
+        X-Forwarded-Host: erapor.sdnpengasinan7.sch.id
+
+  - hostname: absensi.sdnpengasinan7.sch.id
+    service: http://localhost:8888
 
   - service: http_status:404
 EOF
