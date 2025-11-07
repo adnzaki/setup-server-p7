@@ -51,7 +51,7 @@ EOF
 sudo mkdir -p /etc/cloudflared
 sudo tee /etc/cloudflared/config.yml > /dev/null <<EOF
 tunnel: 52b2a47a-0d9d-4b3a-80a9-0f270a86a262
-credentials-file: /home/pengasinan7/.cloudflared/52b2a47a-0d9d-4b3a-80a9-0f270a86a262.json
+credentials-file: $USER_HOME/.cloudflared/52b2a47a-0d9d-4b3a-80a9-0f270a86a262.json
 
 ingress:
   - hostname: surpress.sdnpengasinan7.sch.id
@@ -69,7 +69,7 @@ ingress:
 
   - hostname: bitdanbait.web.id
     service: http://localhost:8082
-    
+
   - hostname: cms.bitdanbait.web.id
     service: http://localhost:8083
 
