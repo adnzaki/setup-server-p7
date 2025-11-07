@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # === Konfigurasi ===
+cd ..
 bash app/surpress.sh
 bash database/surpress.sh
 
