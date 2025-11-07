@@ -44,7 +44,7 @@ echo "😬😬😬 Cek status semua service..."
 sudo systemctl status apache2
 sudo systemctl status nginx
 sudo systemctl status mariadb
-sudo systemctl status tailscaled
-sudo systemctl status tailscale
+sudo systemctl status tailscaled.service
+sudo systemctl status cloudflared
 
 echo "🎉🎉🎉 Instalasi selesai 😄😆"
