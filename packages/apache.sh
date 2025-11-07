@@ -106,6 +106,10 @@ sudo a2dissite 000-default.conf
 echo "🔄 Mengaktifkan mod_rewrite..."
 sudo a2enmod rewrite
 
+# === Tambahkan port 8082 dan 8083 ke Apache ===
+echo "🔌 Menambahkan Listen 8082 dan 8083 ke Apache..."
+sudo sed -i '/^Listen 80$/a Listen 8082\nListen 8083' /etc/apache2/ports.conf
+
 # === Validasi konfigurasi Apache ===
 echo "🔍 Memeriksa validitas konfigurasi Apache..."
 CONFIG_TEST=$(sudo apachectl configtest 2>&1)
