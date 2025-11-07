@@ -4,6 +4,7 @@
 cd ..
 bash app/bitdanbait.sh
 bash database/bitdanbait.sh
+sudo systemctl restart apache2
 
 # === Konfirmasi sebelum tes koneksi ===
 echo ""
