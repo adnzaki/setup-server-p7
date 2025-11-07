@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # === Restore Aplikasi dan Database Bitdanbait ===
+cd ..
 bash app/bitdanbait.sh
 bash database/bitdanbait.sh
 
