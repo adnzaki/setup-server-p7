@@ -124,6 +124,7 @@ HOSTNAMES=(
   "webmin.sdnpengasinan7.sch.id"
   "cockpit.sdnpengasinan7.sch.id"
   "erapor.sdnpengasinan7.sch.id"
+  "bitdanbait.web.id"
 )
 
 # 3. Tes koneksi ke masing-masing hostname
