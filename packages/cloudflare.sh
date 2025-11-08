@@ -67,12 +67,6 @@ ingress:
   - hostname: sdnpengasinan7.sch.id
     service: http://localhost:80
 
-  - hostname: bitdanbait.web.id
-    service: http://localhost:8082
-
-  - hostname: cms.bitdanbait.web.id
-    service: http://localhost:8083
-
   - hostname: webmin.sdnpengasinan7.sch.id
     service: https://localhost:8080
     originRequest:
