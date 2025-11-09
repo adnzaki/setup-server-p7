@@ -5,8 +5,10 @@ TUNNEL_NAME="bitdanbait-tunnel"
 TUNNEL_UUID="ab591b51-ee7c-4525-9d25-e92e9f7750d1"
 DOMAIN1="bitdanbait.web.id"
 DOMAIN2="cms.bitdanbait.web.id"
+DOMAIN3="photos.bitdanbait.web.id"
 PORT1="8082"
 PORT2="8083"
+PORT3="8285"
 CONFIG_DIR="/etc/cloudflared-bitdanbait"
 SERVICE_NAME="cloudflared-bitdanbait"
 USER_NAME="admin1"
@@ -46,6 +48,9 @@ ingress:
 
   - hostname: ${DOMAIN2}
     service: http://localhost:${PORT2}
+
+  - hostname: ${DOMAIN3}
+    service: http://localhost:${PORT3}
 
   - service: http_status:404
 EOF
