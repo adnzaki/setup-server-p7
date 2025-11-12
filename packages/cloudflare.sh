@@ -88,6 +88,15 @@ ingress:
   - hostname: absensi.sdnpengasinan7.sch.id
     service: http://localhost:8888
 
+  - hostname: bitdanbait.web.id
+    service: http://localhost:8082
+
+  - hostname: cms.bitdanbait.web.id
+    service: http://localhost:8083
+
+  - hostname: photos.bitdanbait.web.id
+    service: http://localhost:8285
+
   - service: http_status:404
 EOF
 
