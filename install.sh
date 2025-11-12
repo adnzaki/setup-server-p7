@@ -29,9 +29,9 @@ echo "🚀 Memasang Cloudflare untuk keperluan tunnel..."
 bash packages/cloudflare.sh
 echo "✅ Instalasi Cloudflare selesai"
 
-echo "🚀 Mengonfigurasi tunnel untuk Bitdanbait..."
-bash packages/bitdanbait-tunnel.sh
-echo "✅ Konfigurasi tunnel untuk Bitdanbait selesai"
+# echo "🚀 Mengonfigurasi tunnel untuk Bitdanbait..."
+# bash packages/bitdanbait-tunnel.sh
+# echo "✅ Konfigurasi tunnel untuk Bitdanbait selesai"
 
 echo "🚀 Memasang MEGA CLI..."
 bash packages/mega-cli.sh
