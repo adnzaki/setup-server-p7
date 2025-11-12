@@ -17,8 +17,8 @@ tar --exclude='writable/session/*' \
     -czf "$LOCAL_FOLDER/$ARCHIVE_NAME" -C "$APP_DIR" .
 
 # Upload ke MEGA
-mega-mkdir "/backup-bitdanbait/nouploads/${DATE_FOLDER}"
-mega-put "$LOCAL_FOLDER/$ARCHIVE_NAME" "/backup-bitdanbait/nouploads/${DATE_FOLDER}"
+mega-mkdir -p "/backup-bitdanbait/nouploads/${DATE_FOLDER}"
+mega-put -c "$LOCAL_FOLDER/$ARCHIVE_NAME" "/backup-bitdanbait/nouploads/${DATE_FOLDER}"
 
 # Hapus lokal
 rm "$LOCAL_FOLDER/$ARCHIVE_NAME"

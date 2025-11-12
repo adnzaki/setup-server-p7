@@ -17,8 +17,8 @@ mkdir -p "$LOCAL_FOLDER"
 tar -czf "$LOCAL_FOLDER/$ARCHIVE_NAME" -C "$APP_DIR/$YEAR" "$MONTH"
 
 # Upload ke MEGA
-mega-mkdir "/backup-bitdanbait/uploads/${YEAR}/${MONTH}/${DATE_FOLDER}"
-mega-put "$LOCAL_FOLDER/$ARCHIVE_NAME" "/backup-bitdanbait/uploads/${YEAR}/${MONTH}/${DATE_FOLDER}"
+mega-mkdir -p "/backup-bitdanbait/uploads/${YEAR}/${MONTH}/${DATE_FOLDER}"
+mega-put -c "$LOCAL_FOLDER/$ARCHIVE_NAME" "/backup-bitdanbait/uploads/${YEAR}/${MONTH}/${DATE_FOLDER}"
 
 # Hapus lokal
 rm "$LOCAL_FOLDER/$ARCHIVE_NAME"
