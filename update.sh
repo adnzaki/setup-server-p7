@@ -10,3 +10,4 @@ chmod +x $BACKUP_FOLDER/*.sh
 chmod +x $IMMICH_BACKUP_FOLDER/*.sh
 
 echo "✅🏁 Update selesai. Permission pada $BACKUP_FOLDER telah diperbarui."
+echo "✅ Permission pada $IMMICH_BACKUP_FOLDER telah diperbarui."
