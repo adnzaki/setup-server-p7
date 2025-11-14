@@ -28,11 +28,18 @@ BACKUP_FILE=$(mega-ls "$BACKUP_PREFIX/$LATEST_FOLDER" | sort | tail -n 1)
 
 echo "📦 Mengambil $BACKUP_FILE dari $LATEST_FOLDER..."
 
+# Dapatkan user aktif (yang menjalankan skrip)
+ACTIVE_USER=$(logname)
+echo "🔍 Menambahkan user '$ACTIVE_USER' ke grup www-data..."
+sudo usermod -aG www-data "$ACTIVE_USER"
+
 # === Restore ke folder uploads bulan ini ===
 TARGET_DIR="$UPLOAD_DIR/$YEAR/$MONTH"
 mkdir -p "$TARGET_DIR"
 mega-get "$BACKUP_PREFIX/$LATEST_FOLDER/$BACKUP_FILE" /tmp/
 sudo tar -xzf "/tmp/$BACKUP_FILE" -C "$TARGET_DIR"
+
+echo "🔧 Mengubah permission folder '$UPLOAD_DIR'..."z
 sudo chown -R www-data:www-data "$TARGET_DIR"
 sudo chmod -R 755 "$TARGET_DIR"
 rm "/tmp/$BACKUP_FILE"
