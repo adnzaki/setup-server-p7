@@ -34,14 +34,20 @@ fi
 echo "[INFO] Autentikasi ke Cloudflare..."
 cloudflared login
 
-# === STEP 3: Buat tunnel jika belum ada ===
-EXISTING=$(cloudflared tunnel list | grep "${TUNNEL_UUID}")
-if [ -z "$EXISTING" ]; then
-  echo "[INFO] Membuat tunnel: ${TUNNEL_NAME}"
-  cloudflared tunnel create "${TUNNEL_NAME}"
-else
-  echo "[INFO] Tunnel sudah ada: ${TUNNEL_UUID}"
-fi
+# === STEP 3: Buat file credential ===
+echo "[INFO] Menulis credential file ke ${CREDENTIALS_FILE}"
+mkdir -p "$(dirname "${CREDENTIALS_FILE}")"
+tee "${CREDENTIALS_FILE}" > /dev/null <<EOF
+{
+  "AccountTag": "16917dc5f09ffe994d7118ada14bfc47",
+  "TunnelSecret": "GyL1OjvfSPs5QZfeHSncdotkxN1x5DFlwjF4CjdEmSk=",
+  "TunnelID": "ab591b51-ee7c-4525-9d25-e92e9f7750d1",
+  "Endpoint": ""
+}
+EOF
+chmod 600 "${CREDENTIALS_FILE}"
+chown "${USER_NAME}:${USER_NAME}" "${CREDENTIALS_FILE}"
+
 
 # === STEP 4: Tulis config.yml ===
 echo "[INFO] Menulis config ke ${CONFIG_DIR}/config.yml"

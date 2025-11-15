@@ -4,7 +4,7 @@
 MEGA_EMAIL="sdnpengasinantujuh@gmail.com"
 MEGA_PASS="@pgn7_2021@"
 APP_DIR="/var/www/html/bitdanbait"
-BACKUP_PREFIX="/backup-bitdanbait/full"
+BACKUP_PREFIX="/backup-bitdanbait/nouploads"
 
 # === Login ke MEGA ===
 mega-login "$MEGA_EMAIL" "$MEGA_PASS"

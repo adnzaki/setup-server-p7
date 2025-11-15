@@ -1,8 +1,36 @@
 #!/bin/bash
 
 # === Restore Aplikasi dan Database Bitdanbait ===
+# kembali ke root dulu
 cd ..
-bash app/bitdanbait.sh
+# === Restore Aplikasi Bitdanbait ===
+echo ""
+echo "📦 Silakan pilih opsi restore aplikasi:"
+echo "[1] Entire Site"
+echo "[2] Entire Site without Wordpress Uploads"
+echo "[3] Wordpress' uploads folder only"
+read -p "Masukkan pilihan kamu [1/2/3]: " restore_choice
+
+case "$restore_choice" in
+  1)
+    echo "🔁 Menjalankan restore: Entire Site..."
+    bash app/bitdanbait.sh
+    ;;
+  2)
+    echo "🔁 Menjalankan restore: Entire Site tanpa uploads..."
+    bash app/bitdanbait-nouploads.sh
+    ;;
+  3)
+    echo "🔁 Menjalankan restore: Uploads folder saja..."
+    bash app/bitdanbait-uploads.sh
+    ;;
+  *)
+    echo "❌ Pilihan tidak valid. Restore aplikasi dibatalkan."
+    exit 1
+    ;;
+esac
+
+# === Restore Database Bitdanbait ===
 bash database/bitdanbait.sh
 sudo systemctl restart apache2
 

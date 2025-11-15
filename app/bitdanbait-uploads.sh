@@ -3,8 +3,10 @@
 # === Konfigurasi ===
 MEGA_EMAIL="sdnpengasinantujuh@gmail.com"
 MEGA_PASS="@pgn7_2021@"
-APP_DIR="/var/www/html/bitdanbait"
-BACKUP_PREFIX="/backup-bitdanbait/full"
+UPLOAD_DIR="/var/www/html/bitdanbait/cms/wp-content/uploads"
+YEAR=$(date +"%Y")
+MONTH=$(date +"%m")
+BACKUP_PREFIX="/backup-bitdanbait/uploads/$YEAR/$MONTH"
 
 # === Login ke MEGA ===
 mega-login "$MEGA_EMAIL" "$MEGA_PASS"
@@ -22,15 +24,23 @@ LATEST_FOLDER=$(mega-ls "$BACKUP_PREFIX" | grep -E '^[0-9]{4}-[0-9]{2}-[0-9]{2}$
 
 # === Ambil file backup terbaru ===
 BACKUP_FILE=$(mega-ls "$BACKUP_PREFIX/$LATEST_FOLDER" | sort | tail -n 1)
-[ -z "$BACKUP_FILE" ] && echo "❌ Tidak ada file backup." && exit 1
+[ -z "$BACKUP_FILE" ] && echo "❌ Tidak ada file upload." && exit 1
 
 echo "📦 Mengambil $BACKUP_FILE dari $LATEST_FOLDER..."
 
-# === Bersihkan dan restore ===
-sudo rm -rf "$APP_DIR"/*
+# Dapatkan user aktif (yang menjalankan skrip)
+ACTIVE_USER=$(logname)
+echo "🔍 Menambahkan user '$ACTIVE_USER' ke grup www-data..."
+sudo usermod -aG www-data "$ACTIVE_USER"
+
+# === Restore ke folder uploads bulan ini ===
+TARGET_DIR="$UPLOAD_DIR/$YEAR/$MONTH"
+mkdir -p "$TARGET_DIR"
 mega-get "$BACKUP_PREFIX/$LATEST_FOLDER/$BACKUP_FILE" /tmp/
-sudo tar -xzf "/tmp/$BACKUP_FILE" -C "$APP_DIR"
-sudo chown -R www-data:www-data "$APP_DIR"
-sudo chmod -R 755 "$APP_DIR"
+sudo tar -xzf "/tmp/$BACKUP_FILE" -C "$TARGET_DIR"
+
+echo "🔧 Mengubah permission folder '$UPLOAD_DIR'..."z
+sudo chown -R www-data:www-data "$TARGET_DIR"
+sudo chmod -R 755 "$TARGET_DIR"
 rm "/tmp/$BACKUP_FILE"
-echo "✅ Restore selesai ke $APP_DIR"
+echo "✅ Uploads bulan $MONTH-$YEAR berhasil direstore ke $TARGET_DIR"
