@@ -54,6 +54,9 @@ tunnel: 52b2a47a-0d9d-4b3a-80a9-0f270a86a262
 credentials-file: $USER_HOME/.cloudflared/52b2a47a-0d9d-4b3a-80a9-0f270a86a262.json
 
 ingress:
+  - hostname: cloud.sdnpengasinan7.sch.id
+    service: http://localhost:8286
+
   - hostname: surpress.sdnpengasinan7.sch.id
     service: http://localhost:80
     originRequest:
@@ -68,7 +71,7 @@ ingress:
     service: http://localhost:80
 
   - hostname: webmin.sdnpengasinan7.sch.id
-    service: https://localhost:8080
+    service: https://localhost:10000
     originRequest:
       noTLSVerify: true
 
