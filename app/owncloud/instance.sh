@@ -21,7 +21,7 @@ linkroot='/mnt/storage/owncloud'
 
 htuser='www-data'
 htgroup='www-data'
-rootuser='root'
+rootuser=$1
 
 if [ "$(id -u)" != 0 ]; then
   printf "\nThis script should be run as root user to allow filesystem modifications\nExiting\n\n"
