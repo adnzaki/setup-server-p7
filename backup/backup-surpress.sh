@@ -14,7 +14,7 @@ DATE_FOLDER=$(date +"%Y-%m-%d")
 mkdir -p "$BACKUP_DIR"
 
 # Dump database
-mysqldump -u "$DB_USER" -p"$DB_PASS" "$DB_NAME" > "$BACKUP_DIR/$FILENAME"
+mysqldump "$DB_NAME" > "$BACKUP_DIR/$FILENAME"
 
 # Kompres
 zip -j "$BACKUP_DIR/$ZIPFILE" "$BACKUP_DIR/$FILENAME"
