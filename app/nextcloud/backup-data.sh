@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # === Konfigurasi ===
-SRC="/mnt/storage/nextcloud-data/"
+SRC="/mnt/storage/nextcloud_data/"
 DEST="/mnt/extdrive/nextcloud_data/"
 LOG="/mnt/storage/logs/nextcloud-sync.log"
 MOUNTPOINT="/mnt/extdrive"
@@ -13,6 +13,7 @@ if ! mountpoint -q "$MOUNTPOINT"; then
 fi
 
 # === Jalankan rsync ===
+echo "$(date '+%F %T') [INFO] Memulai sinkronisasi dari $SRC ke $DEST" >> "$LOG"
 rsync -av --delete "$SRC" "$DEST" >> "$LOG" 2>&1
 
 # === Logging sukses/gagal ===
