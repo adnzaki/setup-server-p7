@@ -22,3 +22,11 @@ if [ $? -eq 0 ]; then
 else
     echo "$(date '+%F %T') [FAIL] Sinkronisasi gagal" >> "$LOG"
 fi
+
+# delete log file if larger than 5MB
+LOG_SIZE=$(du -b "$LOG" | cut -f1)
+MAX_SIZE=$((5 * 1024 * 1024)) # 5MB in bytes
+if [ "$LOG_SIZE" -gt "$MAX_SIZE" ]; then
+    > "$LOG"
+    echo "$(date '+%F %T') [INFO] Log file direset karena ukurannya melebihi 5MB" >> "$LOG"
+fi  
