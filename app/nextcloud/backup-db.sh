@@ -10,19 +10,9 @@ DATE_FOLDER=$(date +"%Y-%m-%d")
 # Buat folder backup kalau belum ada
 mkdir -p "$BACKUP_DIR"
 
-# Dump database Nextcloud snap
-# Gunakan mysql-client bawaan snap dengan opsi -e untuk eksekusi query
-sudo nextcloud.mysql-client -e "USE nextcloud; \
-  SET autocommit=0; \
-  FLUSH TABLES WITH READ LOCK; \
-  SHOW MASTER STATUS; \
-  EXIT;" >/dev/null
-
-# Dump isi database
-sudo nextcloud.mysqldump nextcloud > "$BACKUP_DIR/$FILENAME"
-
-# Lepaskan lock
-sudo nextcloud.mysql-client -e "UNLOCK TABLES;"
+# Dump isi database Nextcloud snap
+# Gunakan mysqldump bawaan snap
+sudo nextcloud.mysqldump --databases nextcloud > "$BACKUP_DIR/$FILENAME"
 
 # Kompres hasil dump
 zip -j "$BACKUP_DIR/$ZIPFILE" "$BACKUP_DIR/$FILENAME"
