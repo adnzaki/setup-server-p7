@@ -27,4 +27,4 @@ mega-put "/tmp/$ARCHIVE_FILE" "$MEGA_DEST_FOLDER"
 # === Bersihkan file lokal ===
 rm "/tmp/$BACKUP_FILE" "/tmp/$ARCHIVE_FILE"
 
-echo "📦 Database berhasil diarsipkan (tar.gz) dan diupload ke MEGA."
+echo "📦 Database berhasil diarsipkan dan diupload ke MEGA."
