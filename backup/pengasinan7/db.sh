@@ -1,0 +1,30 @@
+#!/bin/bash
+
+# Konfigurasi
+DB_NAME="pengasinan7"
+DB_USER="root"
+DB_PASS="sekolahkita99"
+BACKUP_DIR="/var/backups/pengasinan7"
+TIMESTAMP=$(date +"%Y-%m-%d_%H-%M")
+FILENAME="db_pengasinan7_${TIMESTAMP}.sql"
+ZIPFILE="${FILENAME}.zip"
+DATE_FOLDER=$(date +"%Y-%m-%d")
+
+# Buat folder backup kalau belum ada
+mkdir -p "$BACKUP_DIR"
+
+# Dump database
+mysqldump "$DB_NAME" > "$BACKUP_DIR/$FILENAME"
+
+# Kompres
+zip -j "$BACKUP_DIR/$ZIPFILE" "$BACKUP_DIR/$FILENAME"
+rm "$BACKUP_DIR/$FILENAME"
+
+# Buat folder di MEGA kalau belum ada
+mega-mkdir "/sdnpengasinan7/database/${DATE_FOLDER}"
+
+# Upload ke MEGA
+mega-put "$BACKUP_DIR/$ZIPFILE" "/sdnpengasinan7/database/${DATE_FOLDER}"
+
+# Opsional: hapus file lokal setelah upload
+rm "$BACKUP_DIR/$ZIPFILE"
