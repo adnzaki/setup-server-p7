@@ -22,13 +22,13 @@ sudo mkdir -p /var/www/html/surpress
 # === Buat konfigurasi virtual host utama ===
 echo "🛠️ Membuat konfigurasi virtual host sdnpengasinan7.sch.id..."
 sudo tee /etc/apache2/sites-available/sdnpengasinan7.conf > /dev/null <<EOF
-<VirtualHost *:80>
+<VirtualHost *:8085>
     ServerName sdnpengasinan7.sch.id
     ServerAlias www.sdnpengasinan7.sch.id
 
-    DocumentRoot /var/www/html
+    DocumentRoot /var/www/html/main-web
 
-    <Directory /var/www/html>
+    <Directory /var/www/html/main-web>
         Options Indexes FollowSymLinks
         AllowOverride All
         Require all granted
@@ -94,12 +94,33 @@ sudo tee /etc/apache2/sites-available/cms-bitdanbait.conf > /dev/null <<EOF
 </VirtualHost>
 EOF
 
+# === Buat konfigurasi virtual host CMS SDN Pengasinan 7 ===
+echo "🛠️ Membuat konfigurasi virtual host cms.sdnpengasinan7.sch.id..."
+sudo tee /etc/apache2/sites-available/pengasinan7.conf > /dev/null <<EOF
+<VirtualHost *:8090>
+    ServerName cms.sdnpengasinan7.sch.id
+    DocumentRoot /var/www/html/sdnpengasinan7/cms
+
+    <Directory /var/www/html/sdnpengasinan7/cms>
+        Options Indexes FollowSymLinks
+        AllowOverride All
+        Require all granted
+    </Directory>
+
+    ErrorLog \${APACHE_LOG_DIR}/cms_sdnpengasinan7_error.log
+    CustomLog \${APACHE_LOG_DIR}/cms_sdnpengasinan7_access.log combined
+</VirtualHost>
+
+EOF
+
+
 # === Aktifkan konfigurasi virtual host dan nonaktifkan default ===
 echo "🔧 Mengaktifkan konfigurasi virtual host..."
 sudo a2ensite sdnpengasinan7.conf
 sudo a2ensite surpress.conf
 sudo a2ensite bitdanbait.conf
 sudo a2ensite cms-bitdanbait.conf
+sudo a2ensite cms-pengasinan7.conf
 sudo a2dissite 000-default.conf
 
 # === Aktifkan mod_rewrite ===
@@ -107,8 +128,8 @@ echo "🔄 Mengaktifkan mod_rewrite..."
 sudo a2enmod rewrite
 
 # === Tambahkan port 8082 dan 8083 ke Apache ===
-echo "🔌 Menambahkan Listen 8082 dan 8083 ke Apache..."
-sudo sed -i '/^Listen 80$/a Listen 8082\nListen 8083' /etc/apache2/ports.conf
+echo "🔌 Menambahkan Listen 8082 sampai dengan 8090 ke Apache..."
+sudo sed -i '/^Listen 80$/a Listen 8082\nListen 8083\nListen 8084\nListen 8085\nListen 8086\nListen 8087\nListen 8088\nListen 8089\nListen 8090' /etc/apache2/ports.conf
 
 # === Validasi konfigurasi Apache ===
 echo "🔍 Memeriksa validitas konfigurasi Apache..."

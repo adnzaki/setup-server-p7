@@ -70,6 +70,9 @@ ingress:
   - hostname: sdnpengasinan7.sch.id
     service: http://localhost:80
 
+  - hostname: cms.sdnpengasinan7.sch.id
+    service: http://localhost:8090
+
   - hostname: webmin.sdnpengasinan7.sch.id
     service: https://localhost:10000
     originRequest:
