@@ -4,7 +4,7 @@
 MEGA_EMAIL="sdnpengasinantujuh@gmail.com"
 MEGA_PASS="@pgn7_2021@"
 MYSQL_PASS="sekolahkita99"
-DB_BACKUP_ROOT="/backup-sdnpengasinan7/database"
+DB_BACKUP_ROOT="/sdnpengasinan7/database"
 
 # === Login ke MEGA ===
 mega-login "$MEGA_EMAIL" "$MEGA_PASS"
@@ -62,7 +62,7 @@ else
 fi
 
 mysql -uroot -p"$MYSQL_PASS" pengasinan7 < "/tmp/${SQL_FILE}"
-echo "✅ Database SDN Pengasinan 7 berhasil direstore dari ${SQL_FILE}"
+echo "✅ Database SDN Pengasinan VII berhasil direstore dari ${SQL_FILE}"
 
 rm "/tmp/${DB_ZIP_FILE}"
 rm "/tmp/${SQL_FILE}"
