@@ -26,7 +26,7 @@ esac
 
 # === Tes akses website ===
 echo "🌐 Menguji akses ke http://surpress.sdnpengasinan7.sch.id ..."
-HTTP_STATUS=$(curl -s -o /dev/null -w "%{http_code}" http://surpress.sdnpengasinan7.sch.id)
+HTTP_STATUS=$(curl -s -o /dev/null -w "%{http_code}" https://surpress.sdnpengasinan7.sch.id)
 
 if [ "$HTTP_STATUS" -eq 200 ]; then
     echo "✅ Akses berhasil: Surpress aktif dan merespons dengan kode 200."

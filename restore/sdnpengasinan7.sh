@@ -35,13 +35,13 @@ case "$confirm" in
 esac
 
 # === Tes akses website ===
-echo "🌐 Menguji akses ke https://bitdanbait.web.id ..."
-HTTP_STATUS=$(curl -s -o /dev/null -w "%{http_code}" https://bitdanbait.web.id)
+echo "🌐 Menguji akses ke https://sdnpengasinan7.sch.id ..."
+HTTP_STATUS=$(curl -s -o /dev/null -w "%{http_code}" https://sdnpengasinan7.sch.id)
 
 if [ "$HTTP_STATUS" -eq 200 ]; then
-    echo "✅ Akses berhasil: Bitdanbait aktif dan merespons dengan kode 200."
+    echo "✅ Akses berhasil: SDN Pengasinan VII aktif dan merespons dengan kode 200."
 else
-    echo "❌ Akses gagal: Bitdanbait merespons dengan kode $HTTP_STATUS."
+    echo "❌ Akses gagal: SDN Pengasinan VII merespons dengan kode $HTTP_STATUS."
 fi
 
-echo "🎉 Restore lengkap: Aplikasi + Database Bitdanbait selesai.🥳"
+echo "🎉 Restore lengkap: Aplikasi + Database SDN Pengasinan VII selesai.🥳"
