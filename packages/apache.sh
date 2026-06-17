@@ -119,6 +119,7 @@ echo "🔧 Mengaktifkan konfigurasi virtual host..."
 sudo a2ensite sdnpengasinan7.conf
 sudo a2ensite surpress.conf
 sudo a2ensite bitdanbait.conf
+sudo a2ensite server-status.conf
 sudo a2ensite cms-bitdanbait.conf
 sudo a2ensite cms-pengasinan7.conf
 sudo a2dissite 000-default.conf
@@ -127,9 +128,9 @@ sudo a2dissite 000-default.conf
 echo "🔄 Mengaktifkan mod_rewrite..."
 sudo a2enmod rewrite
 
-# === Tambahkan port 8082 dan 8083 ke Apache ===
-echo "🔌 Menambahkan Listen 8082 sampai dengan 8090 ke Apache..."
-sudo sed -i '/^Listen 80$/a Listen 8082\nListen 8083\nListen 8084\nListen 8085\nListen 8086\nListen 8087\nListen 8088\nListen 8089\nListen 8090' /etc/apache2/ports.conf
+# === Tambahkan port 8082 sd. 8091 ke Apache ===
+echo "🔌 Menambahkan Listen 8082 sampai dengan 8091 ke Apache..."
+sudo sed -i '/^Listen 80$/a Listen 8082\nListen 8083\nListen 8084\nListen 8085\nListen 8086\nListen 8087\nListen 8088\nListen 8089\nListen 8090\nListen 8091' /etc/apache2/ports.conf
 
 # === Validasi konfigurasi Apache ===
 echo "🔍 Memeriksa validitas konfigurasi Apache..."

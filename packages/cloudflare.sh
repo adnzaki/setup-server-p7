@@ -54,6 +54,20 @@ tunnel: 52b2a47a-0d9d-4b3a-80a9-0f270a86a262
 credentials-file: $USER_HOME/.cloudflared/52b2a47a-0d9d-4b3a-80a9-0f270a86a262.json
 
 ingress:
+  - hostname: server-check.sdnpengasinan7.sch.id
+    service: http://localhost:8091
+
+  - hostname: rapor.sdnpengasinan7.sch.id
+    service: http://100.119.100.15:8535
+   
+  - hostname: dapo.sdnpengasinan7.sch.id
+    service: http://100.119.100.15:5774
+
+  - hostname: rapor-bjr9.sdnpengasinan7.sch.id
+    service: http://100.81.249.7:8535
+    originRequest:
+      noTLSVerify: true
+
   - hostname: cloud.sdnpengasinan7.sch.id
     service: http://localhost:8286
 
@@ -82,14 +96,6 @@ ingress:
     service: https://localhost:9090
     originRequest:
       noTLSVerify: true
-
-  - hostname: erapor.sdnpengasinan7.sch.id
-    service: http://localhost:8055
-    originRequest:
-      httpHostHeader: localhost:8055
-      headers:
-        Host: localhost:8055
-        X-Forwarded-Host: erapor.sdnpengasinan7.sch.id
 
   - hostname: absensi.sdnpengasinan7.sch.id
     service: http://localhost:8888
